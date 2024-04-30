@@ -1,11 +1,4 @@
-import {
-  AfterViewChecked,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-  inject,
-} from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ApiCallsService } from '../../shared/api/api-calls.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Hotelroom } from '../../shared/hotelRoomInterface/hotelRoomType';
