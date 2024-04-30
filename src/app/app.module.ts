@@ -14,6 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiCallsService } from './shared/api/api-calls.service';
 import { HeroImgComponent } from './home/heroImg/hero-img/hero-img.component';
 import { SingleRoomComponent } from './singleRoom/single-room/single-room.component';
+import { FormsModule } from '@angular/forms';
+
 const initializeApp = (api: ApiCallsService) => {
   return () => {
     return api.gettingAllRooms();
@@ -33,7 +35,7 @@ const initializeApp = (api: ApiCallsService) => {
     HeroImgComponent,
     SingleRoomComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [
     {
       provide: APP_INITIALIZER,

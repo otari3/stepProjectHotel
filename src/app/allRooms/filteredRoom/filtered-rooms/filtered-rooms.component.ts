@@ -1,4 +1,11 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewChecked,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { RoutingStateManegmentService } from '../../../shared/routingState/routing-state-manegment.service';
@@ -21,10 +28,12 @@ export class FilteredRoomsComponent implements OnInit, OnDestroy {
     'Double Room',
     'Deluxe Room',
   ];
-  currentIndexOfParems!: number;
+  currentIndexOfParems!: number | null;
   activetedFillterOptions!: Subscription;
   lengthOfItems!: number;
   activetedLengthOfItems!: Subscription;
+  searchInject = inject(RoutingStateManegmentService);
+  previusIndex!: number;
 
   onNavigate(index: number) {
     this.route.navigate(['rooms', index]);
@@ -48,6 +57,7 @@ export class FilteredRoomsComponent implements OnInit, OnDestroy {
         this.cd.detectChanges();
       });
   }
+
   ngOnInit(): void {
     this.chanegingRouterIfItIsOnlyRooms();
     this.changegingPageIndexWheneverWeGoToNewPage();

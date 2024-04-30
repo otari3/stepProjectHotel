@@ -14,7 +14,13 @@
 </main>
 <section>
   <div class="filter">
-    <input type="text" name="" id="" placeholder="search" />
+    <input
+      type="text"
+      name=""
+      id=""
+      placeholder="search"
+      [(ngModel)]="searchInject.searching"
+    />
   </div>
 </section>
 <router-outlet></router-outlet>

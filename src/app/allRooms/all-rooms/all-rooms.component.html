@@ -1,3 +1,8 @@
 <div class="flex" #roomsInTemplet>
-  <app-single-room *ngFor="let items of rooms" [room]="items"></app-single-room>
+  <ng-container *ngFor="let items of rooms">
+    <app-single-room
+      [room]="items"
+      *ngIf="searchingInject.handeningSearch(items)"
+    ></app-single-room
+  ></ng-container>
 </div>

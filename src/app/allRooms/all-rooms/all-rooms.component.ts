@@ -1,9 +1,10 @@
 import {
-  AfterViewInit,
+  AfterViewChecked,
   Component,
   ElementRef,
   OnInit,
   ViewChild,
+  inject,
 } from '@angular/core';
 import { ApiCallsService } from '../../shared/api/api-calls.service';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -15,14 +16,17 @@ import { RoutingStateManegmentService } from '../../shared/routingState/routing-
   templateUrl: './all-rooms.component.html',
   styleUrl: './all-rooms.component.scss',
 })
-export class AllRoomsComponent implements OnInit {
+export class AllRoomsComponent implements OnInit, AfterViewChecked {
   constructor(
     private api: ApiCallsService,
     private activeRoute: ActivatedRoute,
     private routingState: RoutingStateManegmentService
   ) {}
   rooms!: Hotelroom[];
+  searchingInject = inject(RoutingStateManegmentService);
   @ViewChild('roomsInTemplet') roomsInTemplet!: ElementRef;
+
+  siteIsInSearchState = false;
   handelingParamsArgument() {
     this.activeRoute.params.subscribe((data: Params) => {
       if (data['id'] == 0) {
@@ -39,4 +43,5 @@ export class AllRoomsComponent implements OnInit {
   ngOnInit(): void {
     this.handelingParamsArgument();
   }
+  ngAfterViewChecked(): void {}
 }
