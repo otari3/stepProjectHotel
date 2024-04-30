@@ -16,7 +16,7 @@ import { RoutingStateManegmentService } from '../../shared/routingState/routing-
   templateUrl: './all-rooms.component.html',
   styleUrl: './all-rooms.component.scss',
 })
-export class AllRoomsComponent implements OnInit, AfterViewChecked {
+export class AllRoomsComponent implements OnInit {
   constructor(
     private api: ApiCallsService,
     private activeRoute: ActivatedRoute,
@@ -24,8 +24,6 @@ export class AllRoomsComponent implements OnInit, AfterViewChecked {
   ) {}
   rooms!: Hotelroom[];
   searchingInject = inject(RoutingStateManegmentService);
-  @ViewChild('roomsInTemplet') roomsInTemplet!: ElementRef;
-  siteIsInSearchState = false;
   handelingParamsArgument() {
     this.activeRoute.params.subscribe((data: Params) => {
       if (data['id'] == 0) {
@@ -43,5 +41,4 @@ export class AllRoomsComponent implements OnInit, AfterViewChecked {
   ngOnInit(): void {
     this.handelingParamsArgument();
   }
-  ngAfterViewChecked(): void {}
 }
