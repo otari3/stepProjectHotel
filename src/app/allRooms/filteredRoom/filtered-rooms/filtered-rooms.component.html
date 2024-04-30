@@ -1,0 +1,20 @@
+<main>
+  <button
+    *ngFor="let items of fillterOptions; let i = index"
+    class="btn"
+    [ngClass]="{
+      'btn-secondary': currentIndexOfParems != i,
+      'btn-info': currentIndexOfParems === i
+    }"
+    (click)="onNavigate(i)"
+  >
+    {{ items }}
+  </button>
+  <p>items Found {{ lengthOfItems }}</p>
+</main>
+<section>
+  <div class="filter">
+    <input type="text" name="" id="" placeholder="search" />
+  </div>
+</section>
+<router-outlet></router-outlet>

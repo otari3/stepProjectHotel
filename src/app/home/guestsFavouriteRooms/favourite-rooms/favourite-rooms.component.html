@@ -1,0 +1,10 @@
+<header class="header">
+  <h1>Guest Favourite Rooms</h1>
+</header>
+<div>
+  <app-single-room
+    *ngFor="let items of favoriteHotelRooms"
+    [room]="items"
+    class="grid"
+  ></app-single-room>
+</div>
