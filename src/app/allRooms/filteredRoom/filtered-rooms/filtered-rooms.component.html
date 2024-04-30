@@ -21,6 +21,17 @@
       placeholder="search"
       [(ngModel)]="searchInject.searching"
     />
+    <input
+      type="text"
+      placeholder="from"
+      [(ngModel)]="filteringOptionsInput.from"
+    />
+    <input
+      type="text"
+      placeholder="to"
+      [(ngModel)]="filteringOptionsInput.to"
+    />
+    <button (click)="onAppleFilter()">apple Filter</button>
   </div>
 </section>
 <router-outlet></router-outlet>

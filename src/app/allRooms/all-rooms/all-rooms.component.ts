@@ -25,7 +25,6 @@ export class AllRoomsComponent implements OnInit, AfterViewChecked {
   rooms!: Hotelroom[];
   searchingInject = inject(RoutingStateManegmentService);
   @ViewChild('roomsInTemplet') roomsInTemplet!: ElementRef;
-
   siteIsInSearchState = false;
   handelingParamsArgument() {
     this.activeRoute.params.subscribe((data: Params) => {
@@ -36,6 +35,7 @@ export class AllRoomsComponent implements OnInit, AfterViewChecked {
           return items.roomTypeId === +data['id'];
         });
       }
+      this.routingState.currentPage = +data['id'];
       this.routingState.fillterOptionsChanged.next(+data['id']);
       this.routingState.gettingLengthOfRooms.next(this.rooms.length);
     });

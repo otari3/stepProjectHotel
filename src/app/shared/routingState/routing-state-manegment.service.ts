@@ -10,7 +10,8 @@ export class RoutingStateManegmentService {
   fillterOptionsChanged = new Subject<number>();
   gettingLengthOfRooms = new Subject<number>();
   searching: string = '';
-  lengthOfTempletChildren = new Subject<number | void>();
+  currentPage!: number;
+  currentQueryParems: any;
   handeningSearch(items: Hotelroom) {
     let search = this.searching.split(' ').join('').toLowerCase();
     let name = items.name.split(' ').join('').toLowerCase();

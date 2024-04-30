@@ -28,13 +28,12 @@ export class FilteredRoomsComponent implements OnInit, OnDestroy {
     'Double Room',
     'Deluxe Room',
   ];
-  currentIndexOfParems!: number | null;
+  currentIndexOfParems!: number;
   activetedFillterOptions!: Subscription;
   lengthOfItems!: number;
   activetedLengthOfItems!: Subscription;
   searchInject = inject(RoutingStateManegmentService);
-  previusIndex!: number;
-
+  filteringOptionsInput = { from: '', to: '' };
   onNavigate(index: number) {
     this.route.navigate(['rooms', index]);
   }
@@ -57,7 +56,12 @@ export class FilteredRoomsComponent implements OnInit, OnDestroy {
         this.cd.detectChanges();
       });
   }
-
+  onAppleFilter() {
+    this.route.navigate([], {
+      queryParams: this.filteringOptionsInput,
+    });
+    this.routingState.currentQueryParems = this.filteringOptionsInput;
+  }
   ngOnInit(): void {
     this.chanegingRouterIfItIsOnlyRooms();
     this.changegingPageIndexWheneverWeGoToNewPage();

@@ -13,6 +13,12 @@ export class BookingInformationComponent {
     private routeStateManegment: RoutingStateManegmentService
   ) {}
   onGoBack() {
-    this.route.navigate([this.routeStateManegment.previus]);
+    if (this.routeStateManegment.currentQueryParems) {
+      this.route.navigate(['rooms', this.routeStateManegment.currentPage], {
+        queryParams: this.routeStateManegment.currentQueryParems,
+      });
+    } else if (!this.routeStateManegment.currentQueryParems) {
+      this.route.navigate([this.routeStateManegment.previus]);
+    }
   }
 }
