@@ -12,7 +12,7 @@ const routes: Routes = [
     component: FilteredRoomsComponent,
     children: [{ path: ':id', component: AllRoomsComponent }],
   },
-  { path: 'bookroom', component: BookingInformationComponent },
+  { path: 'bookroom/:type/:id', component: BookingInformationComponent },
 ];
 
 @NgModule({

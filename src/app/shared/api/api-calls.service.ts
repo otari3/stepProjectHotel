@@ -14,9 +14,15 @@ export class ApiCallsService {
         .get<Hotelroom[]>(
           'https://hotelbooking.stepprojects.ge/api/Rooms/GetAll'
         )
-        .subscribe((data: Hotelroom[]) => {
-          this.allRooms = data;
-          res();
+        .subscribe({
+          next: (v) => {
+            this.allRooms = v;
+            res();
+          },
+          error: (e) => {
+            alert('cant fetch date from allrooms');
+            res();
+          },
         });
     });
   }

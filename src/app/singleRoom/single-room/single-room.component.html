@@ -14,7 +14,10 @@
         <p class="type">a night</p>
       </div>
     </div>
-    <button class="btn btn-primary bookNow" (click)="onBookRoom()">
+    <button
+      class="btn btn-primary bookNow"
+      (click)="onBookRoom(room.roomTypeId, room.id)"
+    >
       Book Now
     </button>
   </div>

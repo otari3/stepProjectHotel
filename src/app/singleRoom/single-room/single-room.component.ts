@@ -21,8 +21,8 @@ export class SingleRoomComponent {
   addingHiddingClass(htmlElement: HTMLElement) {
     this.rend.addClass(htmlElement, 'hidding');
   }
-  onBookRoom() {
+  onBookRoom(type: number, id: number) {
     this.routerState.previus = this.route.routerState.snapshot.url;
-    this.route.navigate(['bookroom']);
+    this.route.navigate(['bookroom', type, id]);
   }
 }

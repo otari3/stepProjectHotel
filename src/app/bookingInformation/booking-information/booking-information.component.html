@@ -1,1 +1,19 @@
+<section>
+  <div class="imgSlider">
+    <img [src]="photosOfRoom![currentPhoto].source" alt="" />
+    <div class="switchers">
+      <button (click)="onPrev()">prev</button>
+      <button (click)="onNext()">next</button>
+    </div>
+    <ul class="switchingPhotos">
+      <li
+        *ngFor="let items of photosOfRoom; let i = index"
+        style="cursor: pointer"
+        [ngClass]="{ swichersColor: i === currentPhoto }"
+        (click)="onChangePhoto(i)"
+      ></li>
+    </ul>
+  </div>
+</section>
+
 <button (click)="onGoBack()">GO BACK</button>

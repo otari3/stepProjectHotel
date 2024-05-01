@@ -36,6 +36,7 @@ export class FilteredRoomsComponent implements OnInit, OnDestroy {
   filteringOptionsInput = { from: '', to: '' };
   actviteListningToParemsData!: Subscription;
   activetUserResetsFilter!: Subscription;
+  fillterOn = false;
   onNavigate(index: number) {
     this.route.navigate(['rooms', index]);
   }
@@ -70,6 +71,7 @@ export class FilteredRoomsComponent implements OnInit, OnDestroy {
         (data: { from: string; to: string }) => {
           this.filteringOptionsInput.from = data.from;
           this.filteringOptionsInput.to = data.to;
+          this.fillterOn = true;
           this.cd.detectChanges();
         }
       );
@@ -79,6 +81,7 @@ export class FilteredRoomsComponent implements OnInit, OnDestroy {
       this.routingState.handelingIfUserResetsFilter.subscribe((data: void) => {
         this.filteringOptionsInput.from = '';
         this.filteringOptionsInput.to = '';
+        this.fillterOn = false;
         this.cd.detectChanges();
       });
   }

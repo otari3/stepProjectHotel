@@ -37,7 +37,11 @@
           [(ngModel)]="filteringOptionsInput.to"
           class="form-control"
         />
-        <button (click)="onAppleFilter()" class="btn btn-info">
+        <button
+          (click)="onAppleFilter()"
+          class="btn"
+          [ngClass]="{ 'btn-info': fillterOn, 'btn-secondary': !fillterOn }"
+        >
           apple Filter
         </button>
       </div>
