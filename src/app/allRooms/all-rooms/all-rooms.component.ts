@@ -15,6 +15,7 @@ export class AllRoomsComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private routingState: RoutingStateManegmentService
   ) {}
+  unFilteredRooms!: Hotelroom[];
   rooms!: Hotelroom[];
   searchingInject = inject(RoutingStateManegmentService);
   handelingParamsArgument() {
@@ -26,12 +27,37 @@ export class AllRoomsComponent implements OnInit {
           return items.roomTypeId === +data['id'];
         });
       }
+      this.unFilteredRooms = this.rooms;
       this.routingState.currentPage = +data['id'];
       this.routingState.fillterOptionsChanged.next(+data['id']);
       this.routingState.gettingLengthOfRooms.next(this.rooms.length);
     });
   }
+  handelingQueryParems() {
+    this.activeRoute.queryParams.subscribe((data: any) => {
+      if (Object.keys(data).length > 1) {
+        let maxPrice = 10000;
+        if (data['to'] == '') {
+          maxPrice = 10000;
+        } else {
+          maxPrice = data['to'];
+        }
+        this.rooms = this.unFilteredRooms.filter((items: Hotelroom) => {
+          return (
+            items.pricePerNight > data['from'] && items.pricePerNight < maxPrice
+          );
+        });
+        this.routingState.gettingLengthOfRooms.next(this.rooms.length);
+        this.routingState.gettingQueryParemsData.next(data);
+      } else if (this.unFilteredRooms) {
+        this.rooms = this.unFilteredRooms;
+        this.routingState.handelingIfUserResetsFilter.next();
+        this.routingState.gettingLengthOfRooms.next(this.rooms.length);
+      }
+    });
+  }
   ngOnInit(): void {
     this.handelingParamsArgument();
+    this.handelingQueryParems();
   }
 }

@@ -1,9 +1,43 @@
 .filter {
   width: 50%;
   height: 200px;
-  background-color: gold;
+
+  margin-bottom: 40px;
+  border-radius: 15px;
+  box-shadow: 1px 3px 5px gray;
 }
 section {
   display: flex;
   justify-content: center;
+}
+.filteringWithRoomType {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.searchParent {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding-top: 25px;
+  .search {
+    width: 350px;
+  }
+}
+.priceFilter {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding-top: 25px;
+  flex-direction: column;
+  .priceRange {
+    display: flex;
+    gap: 10px;
+    padding-bottom: 10px;
+    input {
+      width: 100px;
+    }
+  }
 }

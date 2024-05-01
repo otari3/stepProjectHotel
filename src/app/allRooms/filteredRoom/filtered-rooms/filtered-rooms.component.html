@@ -1,4 +1,4 @@
-<main>
+<main class="filteringWithRoomType">
   <button
     *ngFor="let items of fillterOptions; let i = index"
     class="btn"
@@ -10,28 +10,41 @@
   >
     {{ items }}
   </button>
-  <p>items Found {{ lengthOfItems }}</p>
 </main>
 <section>
   <div class="filter">
-    <input
-      type="text"
-      name=""
-      id=""
-      placeholder="search"
-      [(ngModel)]="searchInject.searching"
-    />
-    <input
-      type="text"
-      placeholder="from"
-      [(ngModel)]="filteringOptionsInput.from"
-    />
-    <input
-      type="text"
-      placeholder="to"
-      [(ngModel)]="filteringOptionsInput.to"
-    />
-    <button (click)="onAppleFilter()">apple Filter</button>
+    <div class="searchParent">
+      <input
+        type="text"
+        name=""
+        id=""
+        placeholder="search"
+        [(ngModel)]="searchInject.searching"
+        class="form-control search"
+      />
+    </div>
+    <div class="priceFilter">
+      <div class="priceRange">
+        <input
+          type="text"
+          placeholder="from"
+          [(ngModel)]="filteringOptionsInput.from"
+          class="form-control"
+        />
+        <input
+          type="text"
+          placeholder="to"
+          [(ngModel)]="filteringOptionsInput.to"
+          class="form-control"
+        />
+        <button (click)="onAppleFilter()" class="btn btn-info">
+          apple Filter
+        </button>
+      </div>
+      <div>
+        <p *ngIf="!searchInject.searching">items Found {{ lengthOfItems }}</p>
+      </div>
+    </div>
   </div>
 </section>
 <router-outlet></router-outlet>

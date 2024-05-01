@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.activetedRoute.queryParams.subscribe((data: any) => {
       let currentRoute = this.route.routerState.snapshot.url;
-      if (Object.keys(data).length === 0 && currentRoute != '/bookroom') {
+      if (Object.keys(data).length === 0 && !currentRoute.match('/bookroom')) {
         this.handelingState.currentQueryParems = null;
       } else if (Object.keys(data).length > 1) {
         this.handelingState.currentQueryParems = data;

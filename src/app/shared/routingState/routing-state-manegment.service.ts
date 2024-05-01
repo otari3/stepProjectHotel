@@ -12,6 +12,8 @@ export class RoutingStateManegmentService {
   searching: string = '';
   currentPage!: number;
   currentQueryParems: any;
+  gettingQueryParemsData = new Subject<{ from: string; to: string }>();
+  handelingIfUserResetsFilter = new Subject<void>();
   handeningSearch(items: Hotelroom) {
     let search = this.searching.split(' ').join('').toLowerCase();
     let name = items.name.split(' ').join('').toLowerCase();

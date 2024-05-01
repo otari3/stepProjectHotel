@@ -34,6 +34,8 @@ export class FilteredRoomsComponent implements OnInit, OnDestroy {
   activetedLengthOfItems!: Subscription;
   searchInject = inject(RoutingStateManegmentService);
   filteringOptionsInput = { from: '', to: '' };
+  actviteListningToParemsData!: Subscription;
+  activetUserResetsFilter!: Subscription;
   onNavigate(index: number) {
     this.route.navigate(['rooms', index]);
   }
@@ -62,13 +64,35 @@ export class FilteredRoomsComponent implements OnInit, OnDestroy {
     });
     this.routingState.currentQueryParems = this.filteringOptionsInput;
   }
+  listetingToParemsData() {
+    this.actviteListningToParemsData =
+      this.routingState.gettingQueryParemsData.subscribe(
+        (data: { from: string; to: string }) => {
+          this.filteringOptionsInput.from = data.from;
+          this.filteringOptionsInput.to = data.to;
+          this.cd.detectChanges();
+        }
+      );
+  }
+  userResetsFilter() {
+    this.activetUserResetsFilter =
+      this.routingState.handelingIfUserResetsFilter.subscribe((data: void) => {
+        this.filteringOptionsInput.from = '';
+        this.filteringOptionsInput.to = '';
+        this.cd.detectChanges();
+      });
+  }
   ngOnInit(): void {
     this.chanegingRouterIfItIsOnlyRooms();
     this.changegingPageIndexWheneverWeGoToNewPage();
     this.gettingLengthOfIitems();
+    this.listetingToParemsData();
+    this.userResetsFilter();
   }
   ngOnDestroy(): void {
     this.activetedFillterOptions.unsubscribe();
     this.activetedLengthOfItems.unsubscribe();
+    this.actviteListningToParemsData.unsubscribe();
+    this.activetUserResetsFilter.unsubscribe();
   }
 }
