@@ -16,6 +16,7 @@ import { HeroImgComponent } from './home/heroImg/hero-img/hero-img.component';
 import { SingleRoomComponent } from './singleRoom/single-room/single-room.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BookingFormComponent } from './bookingInformation/bookingForm/booking-form/booking-form.component';
+import { OverviewComponent } from './bookingInformation/overview/overview/overview.component';
 
 const initializeApp = (api: ApiCallsService) => {
   return () => {
@@ -36,6 +37,7 @@ const initializeApp = (api: ApiCallsService) => {
     HeroImgComponent,
     SingleRoomComponent,
     BookingFormComponent,
+    OverviewComponent,
   ],
   imports: [
     BrowserModule,
