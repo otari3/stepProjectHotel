@@ -1,1 +1,61 @@
-<p>booking-form works!</p>
+<section>
+  <form [formGroup]="bookingPost" (ngSubmit)="submiting()">
+    <h2>Reservation</h2>
+    <div class="preNight">
+      <p>
+        {{ roomInfo?.name }}
+        <span>{{ roomInfo?.pricePerNight | currency }}</span> - a night
+      </p>
+    </div>
+
+    <div class="inputStyle">
+      <label for="checkIn">check in</label>
+      <input
+        type="date"
+        id="checkIn"
+        class="form-control"
+        formControlName="checkIn"
+        (change)="onDateCheckInChekOut()"
+      />
+      <p
+        *ngIf="OnBookNowValidationOfFrom && bookingPost.get('checkIn')?.errors"
+      >
+        Please Write Check In Date
+      </p>
+    </div>
+    <div class="inputStyle">
+      <label for="checkOut">check out</label>
+      <input
+        type="date"
+        id="checkOut"
+        class="form-control"
+        formControlName="checkOut"
+        (change)="onDateCheckInChekOut()"
+      />
+      <p
+        *ngIf="OnBookNowValidationOfFrom && bookingPost.get('checkOut')?.errors"
+      >
+        Please Write Check Out Date
+      </p>
+    </div>
+    <div class="inputStyle">
+      <label for="custumerName">custumer Name</label>
+      <input
+        type="text"
+        id="custumerName"
+        placeholder="Please enter your name"
+        class="form-control"
+        formControlName="custumerName"
+      />
+      <p
+        *ngIf="
+          OnBookNowValidationOfFrom && bookingPost.get('custumerName')?.errors
+        "
+      >
+        Please Write Your Name
+      </p>
+    </div>
+    <button class="btn btn-primary submitB" type="submit">Book Now</button>
+    <div class="preNight">Price Total <span>Price</span></div>
+  </form>
+</section>

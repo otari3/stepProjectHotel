@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+section {
+  width: 300px;
+  height: 500px;
+  border-radius: 5px;
+  box-shadow: 4px 3px 15px gray;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    h2 {
+      margin-top: 25px;
+    }
+    .preNight {
+      width: 80%;
+      height: auto;
+      padding: 2px 0px 10px 10px;
+      border: 1px black solid;
+      border-style: dashed;
+      span {
+        color: #75c5cf;
+        font-weight: bold;
+      }
+    }
+    .inputStyle {
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+      align-items: center;
+      input {
+        width: 100%;
+        height: 40px;
+        padding: 10px;
+      }
+      label {
+        align-self: flex-start;
+      }
+      p {
+        color: red;
+        font-size: 11px;
+      }
+    }
+  }
+  .submitB {
+    width: 80%;
+    height: 40px;
+  }
+}

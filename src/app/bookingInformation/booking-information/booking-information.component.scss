@@ -4,14 +4,16 @@
   box-sizing: border-box;
 }
 .imgSlider {
-  width: 600px;
-  height: 400px;
+  width: 700px;
+  height: 500px;
   position: relative;
+
   img {
     width: 100%;
     height: 100%;
     position: absolute;
     z-index: -100;
+    border-radius: 5px;
   }
   .switchingPhotos {
     display: flex;
@@ -39,4 +41,10 @@
 }
 .swichersColor {
   background-color: white;
+}
+.post {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  gap: 30px;
 }

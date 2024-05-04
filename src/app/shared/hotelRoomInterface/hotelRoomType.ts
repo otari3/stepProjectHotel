@@ -21,3 +21,14 @@ export interface Image {
   source: string;
   roomId: number;
 }
+export interface PostType {
+  id: number;
+  roomID: number;
+  checkInDate: string;
+  checkOutDate: string;
+  totalPrice: number;
+  isConfirmed: boolean;
+  customerName: string;
+  customerId: string;
+  customerPhone: string;
+}
