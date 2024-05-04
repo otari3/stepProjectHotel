@@ -1,1 +1,100 @@
-<p>overview works!</p>
+<main>
+  <section class="leftSide">
+    <h1>Room Details</h1>
+    <h4>Table overview</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <p><i class="fa-solid fa-circle-check"></i>Double Bed</p>
+          </td>
+          <td>
+            <p><i class="fa-solid fa-circle-check"></i> Free Internet</p>
+          </td>
+          <td>
+            <p><i class="fa-solid fa-circle-check"></i> Free Newspaper</p>
+          </td>
+        </tr>
+        <tr class="Hilgted">
+          <td>
+            <p><i class="fa-solid fa-circle-check"></i>60 square (M)</p>
+          </td>
+          <td>
+            <p><i class="fa-solid fa-circle-check"></i>Beach view</p>
+          </td>
+          <td>
+            <p><i class="fa-solid fa-circle-check"></i> 2 persons</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><i class="fa-solid fa-circle-check"></i>Double Bed</p>
+          </td>
+          <td>
+            <p><i class="fa-solid fa-circle-check"></i> Free Internet</p>
+          </td>
+          <td>
+            <p><i class="fa-solid fa-circle-check"></i>Breakfast included</p>
+          </td>
+        </tr>
+        <tr class="Hilgted">
+          <td>
+            <p><i class="fa-solid fa-circle-check"></i>Private Balcony</p>
+          </td>
+          <td>
+            <p><i class="fa-solid fa-circle-check"></i> Flat Screen TV</p>
+          </td>
+          <td>
+            <p><i class="fa-solid fa-circle-check"></i> Jacuzzi</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <section class="rightSide">
+    <h1>Overview</h1>
+    <div class="options">
+      <button
+        class="btn"
+        *ngFor="let items of overViewOptions"
+        (click)="onViewOptions(items)"
+        [ngClass]="{
+          defultColor: items !== optionsSwitch,
+          onFoucusColor: items === optionsSwitch
+        }"
+      >
+        {{ items }}
+      </button>
+    </div>
+    <article [ngSwitch]="optionsSwitch">
+      <p *ngSwitchCase="'Overview'" class="smoothLoading">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+        interdum eleifend augue, quis rhoncus purus fermentum. In hendrerit
+        risus arcu, in eleifend metus dapibus varius. Nulla dolor sapien,
+        laoreet vel tincidunt non, egestas non justo. Phasellus et mattis
+        lectus, et gravida urna.
+      </p>
+      <p *ngSwitchCase="'Facillites'" class="smoothLoading">
+        this is Facillites: Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum.
+        In hendrerit risus arcu, in eleifend metus dapibus varius. Nulla dolor
+        sapien,
+      </p>
+      <p *ngSwitchCase="'Extra'" class="smoothLoading">
+        this is extras: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Suspendisse interdum eleifend augue, quis rhoncus purus fermentum. In
+        hendrerit risus arcu, in eleifend metus dapibus varius. Nulla dolor
+        sapien,
+      </p>
+    </article>
+  </section>
+</main>
+<footer>
+  <div class="headline"><h2>Other Rooms</h2></div>
+  <div class="otheRooms">
+    <app-single-room
+      *ngFor="let items of otherRooms"
+      [room]="items"
+    ></app-single-room>
+  </div>
+</footer>

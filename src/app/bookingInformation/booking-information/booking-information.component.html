@@ -1,10 +1,21 @@
 <main class="post">
   <section>
     <div class="imgSlider">
+      <button (click)="onGoBack()" class="goBack btn btn-primary">
+        GO BACK
+      </button>
       <img [src]="photosOfRoom![currentPhoto].source" alt="" />
       <div class="switchers">
-        <button (click)="onPrev()">prev</button>
-        <button (click)="onNext()">next</button>
+        <i
+          class="fa-solid fa-arrow-left"
+          (click)="onPrev()"
+          style="cursor: pointer"
+        ></i>
+        <i
+          class="fa-solid fa-arrow-right"
+          (click)="onNext()"
+          style="cursor: pointer"
+        ></i>
       </div>
       <ul class="switchingPhotos">
         <li
@@ -18,4 +29,4 @@
   </section>
   <app-booking-form [roomInfo]="roomInformation"></app-booking-form>
 </main>
-<button (click)="onGoBack()">GO BACK</button>
+<app-overview [otherRooms]="otherRooms"></app-overview>

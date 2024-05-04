@@ -7,6 +7,19 @@
   width: 700px;
   height: 500px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+
+  button {
+    width: 20%;
+    height: 40px;
+    position: absolute;
+    top: -50px;
+  }
+  .fa-solid {
+    color: white;
+    font-size: 30px;
+  }
 
   img {
     width: 100%;
@@ -45,6 +58,11 @@
 .post {
   display: flex;
   justify-content: center;
-  margin-top: 50px;
-  gap: 30px;
+  margin-top: 70px;
+  gap: 75px;
+}
+.goBack {
+  height: 5%;
+  margin-top: 2px;
+  padding: 5px;
 }

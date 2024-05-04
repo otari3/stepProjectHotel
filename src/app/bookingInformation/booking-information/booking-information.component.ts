@@ -60,5 +60,9 @@ export class BookingInformationComponent implements OnInit {
   }
   ngOnInit(): void {
     this.gettingSingleRoom();
+    window.scrollTo(0, 0);
+    for (let i = 0; i < 3; i++) {
+      this.otherRooms.push(this.api.allRooms[i]);
+    }
   }
 }
