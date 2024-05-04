@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Hotelroom } from '../hotelRoomInterface/hotelRoomType';
+import { Hotelroom, PostType } from '../hotelRoomInterface/hotelRoomType';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -25,6 +25,13 @@ export class ApiCallsService {
           },
         });
     });
+  }
+  postingInBooking(bookIn: PostType) {
+    return this.http.post(
+      'https://hotelbooking.stepprojects.ge/api/Booking',
+      bookIn,
+      { responseType: 'text' }
+    );
   }
 
   constructor(private http: HttpClient) {}

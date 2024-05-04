@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { Hotelroom } from '../../../shared/hotelRoomInterface/hotelRoomType';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
+import { ApiCallsService } from '../../../shared/api/api-calls.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-booking-form',
@@ -8,10 +11,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrl: './booking-form.component.scss',
 })
 export class BookingFormComponent {
-  constructor() {}
+  constructor(private api: ApiCallsService, private route: Router) {}
   @Input() roomInfo!: Hotelroom | undefined;
   OnBookNowValidationOfFrom = false;
   totalPrice!: number;
+  PhoneNumber = '5568';
   bookingPost: FormGroup = new FormGroup({
     checkIn: new FormControl('', Validators.required),
     checkOut: new FormControl('', Validators.required),
@@ -19,17 +23,85 @@ export class BookingFormComponent {
   });
   submiting() {
     this.OnBookNowValidationOfFrom = true;
-    console.log(this.bookingPost);
+    if (this.totalPrice <= 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'It Looks Like Dates Are Wrong!',
+      });
+    } else if (this.bookingPost.status === 'INVALID') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'It Looks There Are Missing Fields!',
+      });
+    } else {
+      this.api
+        .postingInBooking({
+          roomID: this.roomInfo?.id,
+          checkInDate: this.bookingPost.get('checkIn')?.value,
+          checkOutDate: this.bookingPost.get('checkOut')?.value,
+          totalPrice: this.totalPrice,
+          isConfirmed: true,
+          customerName: this.bookingPost.get('custumerName')?.value,
+          customerPhone: this.PhoneNumber,
+        })
+        .subscribe({
+          next: (v: any) => {
+            Swal.fire({
+              title: 'Your Dates Has Been Booked',
+              text: 'Do You Want To See Your Booked Room',
+              icon: 'success',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes',
+              cancelButtonText: 'No',
+            }).then((res) => {
+              if (res.isConfirmed) {
+                let number = parseInt(v.match(/\d+/)[0]);
+                this.route.navigate(['allbookroom', number]);
+              }
+            });
+          },
+          error: (e) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'It Looks Like This Date Has Been Booked!',
+            });
+          },
+        });
+    }
   }
   onDateCheckInChekOut() {
     let checkInDate = this.bookingPost.get('checkIn')?.value;
     let checkOutDate = this.bookingPost.get('checkOut')?.value;
     if (checkInDate !== '' && checkOutDate !== '') {
+      this.totalPrice = this.calculateTotalPrice(
+        this.roomInfo!.pricePerNight,
+        checkInDate,
+        checkOutDate
+      );
     }
   }
-  getDayFromDate(inputDate: string) {
-    let dateObject = new Date(inputDate);
-    let day = dateObject.getDate();
-    return day;
+  getNumberOfNights(checkInDate: string, checkOutDate: string) {
+    const oneDay = 24 * 60 * 60 * 1000;
+    const startDate: any = new Date(checkInDate);
+    const endDate: any = new Date(checkOutDate);
+    const diffDays = Math.round(Math.abs((startDate - endDate) / oneDay));
+    if (endDate < startDate) {
+      return 0;
+    }
+    return diffDays;
+  }
+  calculateTotalPrice(
+    pricePerNight: number,
+    checkInDate: string,
+    checkOutDate: string
+  ) {
+    const numberOfNights = this.getNumberOfNights(checkInDate, checkOutDate);
+    const totalPrice = numberOfNights * pricePerNight;
+    return totalPrice;
   }
 }
