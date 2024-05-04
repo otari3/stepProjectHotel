@@ -22,7 +22,9 @@ export class SingleRoomComponent {
     this.rend.addClass(htmlElement, 'hidding');
   }
   onBookRoom(type: number, id: number) {
-    this.routerState.previus = this.route.routerState.snapshot.url;
+    if (!this.route.routerState.snapshot.url.match('/bookroom')) {
+      this.routerState.previus = this.route.routerState.snapshot.url;
+    }
     this.route.navigate(['bookroom', type, id]);
   }
 }
