@@ -89,8 +89,12 @@ export class BookingFormComponent {
     const oneDay = 24 * 60 * 60 * 1000;
     const startDate: any = new Date(checkInDate);
     const endDate: any = new Date(checkOutDate);
+    let currentDate = new Date();
     const diffDays = Math.round(Math.abs((startDate - endDate) / oneDay));
     if (endDate < startDate) {
+      return 0;
+    }
+    if (startDate < currentDate) {
       return 0;
     }
     return diffDays;
