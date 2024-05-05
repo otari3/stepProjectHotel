@@ -1,0 +1,24 @@
+.animationNameVisble {
+  opacity: 1;
+  transition: opacity 500ms ease-in-out;
+}
+.animationNameDisepare {
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+.scrollUp {
+  button {
+    position: fixed;
+    right: 0;
+    bottom: 10px;
+    right: 10px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid #75c5cf;
+    background-color: white;
+    i {
+      color: #75c5cf;
+    }
+  }
+}

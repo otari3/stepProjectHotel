@@ -1,2 +1,13 @@
 <app-navbar></app-navbar>
 <router-outlet></router-outlet>
+<div class="scrollUp">
+  <button
+    (click)="onScrollUp()"
+    [ngClass]="{
+      animationNameDisepare: isScrolled <= 0,
+      animationNameVisble: isScrolled > 0
+    }"
+  >
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+</div>

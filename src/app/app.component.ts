@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoutingStateManegmentService } from './shared/routingState/routing-state-manegment.service';
 
@@ -13,6 +13,15 @@ export class AppComponent implements OnInit {
     private handelingState: RoutingStateManegmentService,
     private route: Router
   ) {}
+  isScrolled: number = 0;
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll() {
+    this.isScrolled = window.scrollY;
+  }
+  onScrollUp() {
+    window.scrollTo(0, 0);
+  }
   ngOnInit(): void {
     this.activetedRoute.queryParams.subscribe((data: any) => {
       let currentRoute = this.route.routerState.snapshot.url;
