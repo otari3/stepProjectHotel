@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Hotelroom, PostType } from '../hotelRoomInterface/hotelRoomType';
+import {
+  BookedRoomType,
+  Hotelroom,
+  PostType,
+} from '../hotelRoomInterface/hotelRoomType';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -37,6 +41,17 @@ export class ApiCallsService {
   gettingHotels() {
     return this.http.get(
       'https://hotelbooking.stepprojects.ge/api/Hotels/GetHotels?city=tbilisi'
+    );
+  }
+  gettingBookedRooms() {
+    return this.http.get<BookedRoomType[]>(
+      'https://hotelbooking.stepprojects.ge/api/Booking'
+    );
+  }
+  deletingFromBooking(id: number) {
+    return this.http.delete(
+      `https://hotelbooking.stepprojects.ge/api/Booking/${id}`,
+      { responseType: 'text' }
     );
   }
 

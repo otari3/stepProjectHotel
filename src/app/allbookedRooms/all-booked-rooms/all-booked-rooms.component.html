@@ -1,1 +1,36 @@
-<p>all-booked-rooms works!</p>
+<main>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Book ID</th>
+        <th scope="col">Customer</th>
+        <th scope="col">Status</th>
+        <th scope="col">Check in</th>
+        <th>Check out</th>
+        <th>Total Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let items of bookedRooms; let i = index"
+        [ngClass]="{ 'table-info': justBooked === items.id }"
+        #booked
+      >
+        <th scope="row">{{ items.id }}</th>
+        <td>Name: {{ items.customerName }}</td>
+        <td>
+          <button class="btn btn-secondary booked">Booked</button>
+        </td>
+        <td>{{ items.checkInDate }}</td>
+        <td>{{ items.checkOutDate }}</td>
+        <td>{{ items.totalPrice }}</td>
+        <td>
+          <button class="btn btn-danger cancel" (click)="deleting(items.id, i)">
+            CANCEL BOOKING
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</main>
