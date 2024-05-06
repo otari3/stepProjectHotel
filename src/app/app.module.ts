@@ -17,6 +17,7 @@ import { SingleRoomComponent } from './singleRoom/single-room/single-room.compon
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BookingFormComponent } from './bookingInformation/bookingForm/booking-form/booking-form.component';
 import { OverviewComponent } from './bookingInformation/overview/overview/overview.component';
+import { UspSectionComponent } from './home/uspSection/usp-section/usp-section.component';
 
 const initializeApp = (api: ApiCallsService) => {
   return () => {
@@ -38,6 +39,7 @@ const initializeApp = (api: ApiCallsService) => {
     SingleRoomComponent,
     BookingFormComponent,
     OverviewComponent,
+    UspSectionComponent,
   ],
   imports: [
     BrowserModule,
