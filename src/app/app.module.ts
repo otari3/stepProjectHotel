@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BookingFormComponent } from './bookingInformation/bookingForm/booking-form/booking-form.component';
 import { OverviewComponent } from './bookingInformation/overview/overview/overview.component';
 import { UspSectionComponent } from './home/uspSection/usp-section/usp-section.component';
+import { HotelsComponent } from './hotels/hotels/hotels.component';
 
 const initializeApp = (api: ApiCallsService) => {
   return () => {
@@ -40,6 +41,7 @@ const initializeApp = (api: ApiCallsService) => {
     BookingFormComponent,
     OverviewComponent,
     UspSectionComponent,
+    HotelsComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { AllRoomsComponent } from './allRooms/all-rooms/all-rooms.component';
 import { FilteredRoomsComponent } from './allRooms/filteredRoom/filtered-rooms/filtered-rooms.component';
 import { BookingInformationComponent } from './bookingInformation/booking-information/booking-information.component';
 import { AllBookedRoomsComponent } from './allbookedRooms/all-booked-rooms/all-booked-rooms.component';
+import { HotelsComponent } from './hotels/hotels/hotels.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   },
   { path: 'bookroom/:type/:id', component: BookingInformationComponent },
   { path: 'allbookroom/:id', component: AllBookedRoomsComponent },
+  { path: 'hotels', component: HotelsComponent },
 ];
 
 @NgModule({

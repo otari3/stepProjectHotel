@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ApiCallsService {
   allRooms!: Hotelroom[];
+  allHotels: any;
 
   gettingAllRooms() {
     return new Promise<void>((res, rej) => {
@@ -31,6 +32,11 @@ export class ApiCallsService {
       'https://hotelbooking.stepprojects.ge/api/Booking',
       bookIn,
       { responseType: 'text' }
+    );
+  }
+  gettingHotels() {
+    return this.http.get(
+      'https://hotelbooking.stepprojects.ge/api/Hotels/GetHotels?city=tbilisi'
     );
   }
 

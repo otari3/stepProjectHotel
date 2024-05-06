@@ -1,0 +1,9 @@
+<main>
+  <div class="mainContainer" *ngFor="let items of allHotels">
+    <div class="innerContainer">
+      <img [src]="items.featuredImage" alt="" />
+      <p>{{ items.name }}</p>
+    </div>
+    <button class="btn btn-primary" routerLink="/rooms">View Rooms</button>
+  </div>
+</main>
