@@ -77,7 +77,7 @@ export class AllBookedRoomsComponent implements OnInit, AfterViewChecked {
           let rect = items.nativeElement.getBoundingClientRect();
           this.elementIsScrolled = true;
           setTimeout(() => {
-            window.scrollTo(0, rect.y);
+            window.scrollTo(0, rect.y - 100);
           }, 200);
         }
       });
