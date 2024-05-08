@@ -88,3 +88,22 @@ footer {
     margin-bottom: 70px;
   }
 }
+
+@media screen and (max-width: 767px) {
+  main {
+    flex-direction: column;
+    .leftSide {
+      display: none;
+    }
+  }
+  .otheRooms {
+    flex-wrap: wrap;
+  }
+  .rightSide {
+    article {
+      p {
+        width: 100%;
+      }
+    }
+  }
+}
