@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, Renderer2 } from '@angular/core';
+import { Component, Input, Renderer2 } from '@angular/core';
 import { Hotelroom } from '../../shared/hotelRoomInterface/hotelRoomType';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RoutingStateManegmentService } from '../../shared/routingState/routing-state-manegment.service';
 
 @Component({
@@ -12,7 +12,8 @@ export class SingleRoomComponent {
   constructor(
     private rend: Renderer2,
     private route: Router,
-    private routerState: RoutingStateManegmentService
+    private routerState: RoutingStateManegmentService,
+    private activtedRouter: ActivatedRoute
   ) {}
   @Input() room!: Hotelroom;
   removeingHiddingClass(htmlElement: HTMLElement) {
@@ -22,8 +23,12 @@ export class SingleRoomComponent {
     this.rend.addClass(htmlElement, 'hidding');
   }
   onBookRoom(type: number, id: number) {
-    if (!this.route.routerState.snapshot.url.match('/bookroom')) {
-      this.routerState.previus = this.route.routerState.snapshot.url;
+    let ifBookRoomsPage = this.route.routerState.snapshot.url;
+    if (!ifBookRoomsPage.match('bookroom')) {
+      let currentRoute = this.route.url.split('?')[0];
+      let currentQueryParems = this.activtedRouter.snapshot.queryParams;
+      this.routerState.currentQueryParems = currentQueryParems;
+      this.routerState.previus = currentRoute;
     }
     this.route.navigate(['bookroom', type, id]);
   }

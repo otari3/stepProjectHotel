@@ -63,7 +63,6 @@ export class FilteredRoomsComponent implements OnInit, OnDestroy {
     this.route.navigate([], {
       queryParams: this.filteringOptionsInput,
     });
-    this.routingState.currentQueryParems = this.filteringOptionsInput;
   }
   listetingToParemsData() {
     this.actviteListningToParemsData =

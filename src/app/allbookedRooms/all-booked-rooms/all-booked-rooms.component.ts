@@ -1,18 +1,14 @@
 import {
   AfterViewChecked,
-  AfterViewInit,
   Component,
   ElementRef,
-  IterableDiffers,
   OnInit,
   QueryList,
-  Renderer2,
   ViewChildren,
 } from '@angular/core';
 import { BookedRoomType } from '../../shared/hotelRoomInterface/hotelRoomType';
 import { ApiCallsService } from '../../shared/api/api-calls.service';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subject } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Component({

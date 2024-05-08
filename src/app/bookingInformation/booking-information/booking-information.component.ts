@@ -25,13 +25,9 @@ export class BookingInformationComponent implements OnInit {
   otherRooms: Hotelroom[] = [];
   currentPhoto = 0;
   onGoBack() {
-    if (this.routeStateManegment.currentQueryParems) {
-      this.route.navigate(['rooms', this.routeStateManegment.currentPage], {
-        queryParams: this.routeStateManegment.currentQueryParems,
-      });
-    } else if (!this.routeStateManegment.currentQueryParems) {
-      this.route.navigate([this.routeStateManegment.previus]);
-    }
+    this.route.navigate([this.routeStateManegment.previus], {
+      queryParams: this.routeStateManegment.currentQueryParems,
+    });
   }
   gettingSingleRoom() {
     this.activtedRoute.params.subscribe((data: Params) => {

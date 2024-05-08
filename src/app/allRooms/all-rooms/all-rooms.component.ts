@@ -3,6 +3,7 @@ import { ApiCallsService } from '../../shared/api/api-calls.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Hotelroom } from '../../shared/hotelRoomInterface/hotelRoomType';
 import { RoutingStateManegmentService } from '../../shared/routingState/routing-state-manegment.service';
+import { getLocaleMonthNames } from '@angular/common';
 
 @Component({
   selector: 'app-all-rooms',
