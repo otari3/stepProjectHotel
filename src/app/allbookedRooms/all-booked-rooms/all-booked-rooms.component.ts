@@ -10,6 +10,7 @@ import { BookedRoomType } from '../../shared/hotelRoomInterface/hotelRoomType';
 import { ApiCallsService } from '../../shared/api/api-calls.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import Swal from 'sweetalert2';
+import { SpinerService } from '../../shared/spiner/spiner.service';
 
 @Component({
   selector: 'app-all-booked-rooms',
@@ -19,7 +20,8 @@ import Swal from 'sweetalert2';
 export class AllBookedRoomsComponent implements OnInit, AfterViewChecked {
   constructor(
     private api: ApiCallsService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private spiner: SpinerService
   ) {}
   bookedRooms!: BookedRoomType[];
   justBooked!: number;
@@ -57,11 +59,18 @@ export class AllBookedRoomsComponent implements OnInit, AfterViewChecked {
     });
   }
   ngOnInit(): void {
-    this.api.gettingBookedRooms().subscribe((data: BookedRoomType[]) => {
-      this.bookedRooms = data.filter((items: BookedRoomType) => {
-        return items.customerPhone === this.PhoneNumber || items.id === 15;
-      });
+    this.spiner.loadingScrollBar();
+    this.api.gettingBookedRooms().subscribe({
+      next: (r: BookedRoomType[]) => {
+        setTimeout(() => {
+          this.bookedRooms = r.filter((items: BookedRoomType) => {
+            return items.customerPhone === this.PhoneNumber || items.id === 11;
+          });
+          this.spiner.finishedLoadingScrollBar();
+        }, 1000);
+      },
     });
+
     this.activeRoute.params.subscribe((data: Params) => {
       this.justBooked = +data['id'];
     });
@@ -71,10 +80,12 @@ export class AllBookedRoomsComponent implements OnInit, AfterViewChecked {
       this.booked.forEach((items) => {
         if (items.nativeElement.classList.contains('table-info')) {
           let rect = items.nativeElement.getBoundingClientRect();
-          this.elementIsScrolled = true;
-          setTimeout(() => {
-            window.scrollTo(0, rect.y - 100);
-          }, 200);
+          if (rect) {
+            this.elementIsScrolled = true;
+            setTimeout(() => {
+              window.scrollTo(0, rect.y - 100);
+            }, 200);
+          }
         }
       });
     }

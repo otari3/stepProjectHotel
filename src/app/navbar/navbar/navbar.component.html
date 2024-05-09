@@ -55,3 +55,17 @@
     </div>
   </div>
 </nav>
+<div
+  class="progress progressBar"
+  role="progressbar"
+  aria-label="Basic example"
+  aria-valuenow="25"
+  aria-valuemin="0"
+  aria-valuemax="100"
+  *ngIf="loading"
+>
+  <div
+    class="progress-bar"
+    [style]="{ width: scrollBarLength / 100 | percent }"
+  ></div>
+</div>
