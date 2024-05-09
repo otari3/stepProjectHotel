@@ -55,7 +55,10 @@
         Please Write Your Name
       </p>
     </div>
-    <button class="btn btn-primary submitB" type="submit">Book Now</button>
+    <button class="btn btn-primary submitB" type="submit">
+      <div class="dot-pulse loading" *ngIf="loading"></div>
+      <div *ngIf="!loading">Book Now</div>
+    </button>
     <div class="preNight">
       Price Total <span>{{ totalPrice | currency }}</span>
     </div>

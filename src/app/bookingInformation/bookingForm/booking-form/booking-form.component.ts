@@ -1,21 +1,27 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Hotelroom } from '../../../shared/hotelRoomInterface/hotelRoomType';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ApiCallsService } from '../../../shared/api/api-calls.service';
 import { Router } from '@angular/router';
+import { SpinerService } from '../../../shared/spiner/spiner.service';
 
 @Component({
   selector: 'app-booking-form',
   templateUrl: './booking-form.component.html',
   styleUrl: './booking-form.component.scss',
 })
-export class BookingFormComponent {
-  constructor(private api: ApiCallsService, private route: Router) {}
+export class BookingFormComponent implements OnInit {
+  constructor(
+    private api: ApiCallsService,
+    private route: Router,
+    private spiner: SpinerService
+  ) {}
   @Input() roomInfo!: Hotelroom | undefined;
   OnBookNowValidationOfFrom = false;
   totalPrice!: number;
   PhoneNumber = '5568';
+  loading = false;
   bookingPost: FormGroup = new FormGroup({
     checkIn: new FormControl('', Validators.required),
     checkOut: new FormControl('', Validators.required),
@@ -36,6 +42,7 @@ export class BookingFormComponent {
         text: 'It Looks There Are Missing Fields!',
       });
     } else {
+      this.spiner.loading();
       this.api
         .postingInBooking({
           roomID: this.roomInfo?.id,
@@ -48,23 +55,27 @@ export class BookingFormComponent {
         })
         .subscribe({
           next: (v: any) => {
-            Swal.fire({
-              title: 'Your Dates Has Been Booked',
-              text: 'Do You Want To See Your Booked Room',
-              icon: 'success',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Yes',
-              cancelButtonText: 'No',
-            }).then((res) => {
-              if (res.isConfirmed) {
-                let number = parseInt(v.match(/\d+/)[0]);
-                this.route.navigate(['allbookroom', number]);
-              }
-            });
+            setTimeout(() => {
+              this.spiner.finishedLoadin();
+              Swal.fire({
+                title: 'Your Dates Has Been Booked',
+                text: 'Do You Want To See Your Booked Room',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+              }).then((res) => {
+                if (res.isConfirmed) {
+                  let number = parseInt(v.match(/\d+/)[0]);
+                  this.route.navigate(['allbookroom', number]);
+                }
+              });
+            }, 200);
           },
           error: (e) => {
+            this.spiner.finishedLoadin();
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
@@ -107,5 +118,10 @@ export class BookingFormComponent {
     const numberOfNights = this.getNumberOfNights(checkInDate, checkOutDate);
     const totalPrice = numberOfNights * pricePerNight;
     return totalPrice;
+  }
+  ngOnInit(): void {
+    this.spiner.ifLoading.subscribe((data: boolean) => {
+      this.loading = data;
+    });
   }
 }
