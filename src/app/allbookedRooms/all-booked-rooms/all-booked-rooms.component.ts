@@ -64,7 +64,7 @@ export class AllBookedRoomsComponent implements OnInit, AfterViewChecked {
       next: (r: BookedRoomType[]) => {
         setTimeout(() => {
           this.bookedRooms = r.filter((items: BookedRoomType) => {
-            return items;
+            return items.customerPhone === this.PhoneNumber || items.id === 11;
           });
           this.spiner.finishedLoadingScrollBar();
         }, 1000);
