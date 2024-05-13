@@ -15,6 +15,7 @@ const routes: Routes = [
     children: [{ path: ':id', component: AllRoomsComponent }],
   },
   { path: 'bookroom/:type/:id', component: BookingInformationComponent },
+  { path: 'allbookroom', component: AllBookedRoomsComponent },
   { path: 'allbookroom/:id', component: AllBookedRoomsComponent },
   { path: 'hotels', component: HotelsComponent },
 ];
