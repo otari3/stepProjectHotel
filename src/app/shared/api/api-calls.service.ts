@@ -15,20 +15,16 @@ export class ApiCallsService {
 
   gettingAllRooms() {
     return new Promise<void>((res, rej) => {
-      this.http
-        .get<Hotelroom[]>(
-          'https://hotelbooking.stepprojects.ge/api/Rooms/GetAll'
-        )
-        .subscribe({
-          next: (v) => {
-            this.allRooms = v;
-            res();
-          },
-          error: (e) => {
-            alert('cant fetch date from allrooms');
-            res();
-          },
-        });
+      this.http.get<Hotelroom[]>('../assets/rooms.json').subscribe({
+        next: (v) => {
+          this.allRooms = v;
+          res();
+        },
+        error: (e) => {
+          alert('cant fetch date from allrooms');
+          res();
+        },
+      });
     });
   }
   postingInBooking(bookIn: PostType) {

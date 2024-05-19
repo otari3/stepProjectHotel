@@ -27,7 +27,13 @@
         <td>{{ items.totalPrice }}</td>
         <td>
           <button class="btn btn-danger cancel" (click)="deleting(items.id, i)">
-            CANCEL BOOKING
+            <div
+              class="dot-pulse loading"
+              *ngIf="loading && i === currentlyDeleting"
+            ></div>
+            <div *ngIf="!(this.loading && i === this.currentlyDeleting)">
+              Cancel Booking
+            </div>
           </button>
         </td>
       </tr>

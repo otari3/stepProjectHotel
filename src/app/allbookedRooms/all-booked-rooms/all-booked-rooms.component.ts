@@ -27,8 +27,11 @@ export class AllBookedRoomsComponent implements OnInit, AfterViewChecked {
   justBooked!: number;
   elementIsScrolled: boolean = false;
   PhoneNumber = '5568';
+  loading = false;
+  currentlyDeleting!: number;
   @ViewChildren('booked') booked!: QueryList<ElementRef>;
   deleting(id: number, index: number) {
+    this.currentlyDeleting = index;
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -39,8 +42,10 @@ export class AllBookedRoomsComponent implements OnInit, AfterViewChecked {
       confirmButtonText: 'Yes, delete it!',
     }).then((res) => {
       if (res.isConfirmed) {
+        this.loading = true;
         this.api.deletingFromBooking(id).subscribe({
           next: () => {
+            this.loading = false;
             Swal.fire({
               title: 'Room Deleted',
               icon: 'success',
@@ -48,6 +53,7 @@ export class AllBookedRoomsComponent implements OnInit, AfterViewChecked {
             this.bookedRooms.splice(index, 1);
           },
           error: () => {
+            this.loading = false;
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
@@ -58,13 +64,15 @@ export class AllBookedRoomsComponent implements OnInit, AfterViewChecked {
       }
     });
   }
+
   ngOnInit(): void {
     this.spiner.loadingScrollBar();
     this.api.gettingBookedRooms().subscribe({
       next: (r: BookedRoomType[]) => {
         setTimeout(() => {
           this.bookedRooms = r.filter((items: BookedRoomType) => {
-            return items.customerPhone === this.PhoneNumber || items.id === 11;
+            //.customerPhone === this.PhoneNumber || items.id === 11; to filter
+            return items;
           });
           this.spiner.finishedLoadingScrollBar();
         }, 1000);

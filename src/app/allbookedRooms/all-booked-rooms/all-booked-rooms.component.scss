@@ -1,3 +1,8 @@
+@use "three-dots" with (
+  $dot-width: 6px,
+  $dot-height: 6px,
+  $dot-color: white
+);
 * {
   margin: 0;
   padding: 0;
@@ -10,4 +15,11 @@
 }
 .th {
   width: 50px !important;
+}
+.cancel {
+  width: 110px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

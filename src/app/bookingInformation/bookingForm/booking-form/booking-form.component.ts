@@ -76,11 +76,19 @@ export class BookingFormComponent implements OnInit {
           },
           error: (e) => {
             this.spiner.finishedLoadin();
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'It Looks Like This Date Has Been Booked!',
-            });
+            if (e.status === 500) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'It Looks Like There Is Server Error!',
+              });
+            } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'It Looks Like This Date Has Been Booked!',
+              });
+            }
           },
         });
     }
