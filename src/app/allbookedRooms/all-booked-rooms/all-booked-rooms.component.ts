@@ -86,6 +86,7 @@ export class AllBookedRoomsComponent
         },
         error: (e) => {
           if (e.status === 500) {
+            this.spiner.finishedLoadingScrollBar();
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
