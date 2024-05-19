@@ -84,6 +84,15 @@ export class AllBookedRoomsComponent
             this.spiner.finishedLoadingScrollBar();
           }, 1000);
         },
+        error: (e) => {
+          if (e.status === 500) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'It Looks Like There Is Server Error!',
+            });
+          }
+        },
       });
 
     this.activeRoute.params.subscribe((data: Params) => {
