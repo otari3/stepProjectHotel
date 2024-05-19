@@ -22,9 +22,9 @@
         <td>
           <button class="btn btn-secondary booked">Booked</button>
         </td>
-        <td>{{ items.checkInDate }}</td>
-        <td>{{ items.checkOutDate }}</td>
-        <td>{{ items.totalPrice }}</td>
+        <td>{{ items.checkInDate.split("T")[0] }}</td>
+        <td>{{ items.checkOutDate.split("T")[0] }}</td>
+        <td>{{ items.totalPrice | currency }}</td>
         <td>
           <button class="btn btn-danger cancel" (click)="deleting(items.id, i)">
             <div
